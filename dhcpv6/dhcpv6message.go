@@ -288,6 +288,18 @@ func (mo MessageOptions) DHCP4oDHCP6Server() *OptDHCP4oDHCP6Server {
 	return nil
 }
 
+// NTP returns the NTP Server option as defined by RFC 5908.
+func (mo MessageOptions) NTP() *OptNTPServer {
+	opt := mo.Options.GetOne(OptionNTPServer)
+	if opt == nil {
+		return nil
+	}
+	if ntp, ok := opt.(*OptNTPServer); ok {
+		return ntp
+	}
+	return nil
+}
+
 // Message represents a DHCPv6 Message as defined by RFC 3315 Section 6.
 type Message struct {
 	MessageType   MessageType
